@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "macroZone",
-    "slug": "macroZone",
+    "slug": "macrozone",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -34,11 +34,22 @@
             "imageWidth": 76
           }
         }
-      ]
+      ],
+      "expo-font",
+      "expo-image",
+      "expo-status-bar",
+      "expo-web-browser"
     ],
     "experiments": {
       "typedRoutes": true,
       "reactCompiler": true
-    }
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "df9bbf87-df0b-4aa8-87ea-1d0dc2168095"
+      }
+    },
+    "owner": "ajay_marimuthu"
   }
 }
