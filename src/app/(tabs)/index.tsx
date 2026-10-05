@@ -1,45 +1,37 @@
-import HomeHeader from '@/components/HomeHeader';
-import MacroGrid from '@/components/MacroGrid';
-import RecentMeals from '@/components/RecentMeals';
-import { getMeals, Meal } from '@/storage/meals';
+import StatsGrid from '@/components/StatsGrid';
+import RecentExpenses from '@/components/RecentExpenses';
+import { getExpenses, Expense } from '@/storage/expenses';
 import { globalStyles } from '@/styles/global';
 import { useFocusEffect } from 'expo-router';
 import { useCallback, useState } from 'react';
 import { ScrollView, Text, View } from 'react-native';
-import ShareButton from '@/components/ShareButton';
-import CopyButton from '@/components/CopyButton';
-import ReminderToggle from '@/components/ReminderToggle';
 
 export default function HomeScreen() {
-  const [meals, setMeals] = useState<Meal[]>([]);
+  const [expenses, setExpenses] = useState<Expense[]>([]);
 
-  const loadMeals = async () => {
-    const data = await getMeals();
-    setMeals(data);
-    console.log('Loaded meals:', data);
+  const loadExpenses = async () => {
+    const data = await getExpenses();
+    setExpenses(data);
+    console.log('Loaded expenses:', data);
   };
 
   useFocusEffect(
     useCallback(() => {
-      loadMeals();
+      loadExpenses();
     }, []),
   );
 
   return (
     <ScrollView style={globalStyles.container}>
-      <Text style={globalStyles.title}>MacroZone</Text>
-      <HomeHeader />
+      <Text style={globalStyles.title}>ExpenseTracker</Text>
 
       <View style={globalStyles.header}>
-        <Text style={globalStyles.title}>MacroZone</Text>
-        <ShareButton meals={meals} />
+        <Text style={globalStyles.title}>ExpenseTracker</Text>
       </View>
-      <MacroGrid meals={meals} />
-      <CopyButton meals={meals} />
-      <RecentMeals meals={meals} onDelete={loadMeals} />
-      <Text>helllooooooo</Text>
-
-      <ReminderToggle />
+      
+      <StatsGrid expenses={expenses} />
+      
+      <RecentExpenses expenses={expenses} onDelete={loadExpenses} />
     </ScrollView>
   );
 }
